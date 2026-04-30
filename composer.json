@@ -1,0 +1,30 @@
+{
+    "name": "diogo2550/database-system-setting",
+    "description": "Um simples plugin para abstrair o uso de configurações do sistema com o banco de dados.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Diogo2550\\DatabaseSystemSetting\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diogo Alves",
+            "email": "diogoalvesdcruz@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Diogo2550\\DatabaseSystemSetting\\DatabaseSystemSettingServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
