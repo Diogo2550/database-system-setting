@@ -2,13 +2,16 @@
 
 namespace Diogo2550\DatabaseSystemSetting;
 
-use Closure;
 use Diogo2550\DatabaseSystemSetting\Models\SystemSetting;
 use Illuminate\Support\ServiceProvider;
-use Override;
 
 class DatabaseSystemSettingServiceProvider extends ServiceProvider
 {
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/config/settings.php', 'settings');
+    }
+
     /**
      * Load the settings from the database and set them in the config. 
      * We will cache the settings to avoid hitting the database on every request.
@@ -18,7 +21,17 @@ class DatabaseSystemSettingServiceProvider extends ServiceProvider
             __DIR__ . '/database/migrations/2026_05_01_010949_system_setting.php' => database_path('migrations/2026_05_01_010949_system_setting.php'),
             __DIR__ . '/config/settings.php' => config_path('settings.php'),
         ], 'database-system-setting');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Diogo2550\DatabaseSystemSetting\Console\Commands\SyncSettingsCommand::class,
+            ]);
+        }
         
+        $this->mergeSettingsIntoConfig();
+    }
+    
+    protected function mergeSettingsIntoConfig() {
         /**
          * Try is necessary to avoid errors when the database is not available (e.g. during the first migration). 
          * In this case, we will just return an empty array and the settings will be loaded on the next request.
@@ -41,13 +54,12 @@ class DatabaseSystemSettingServiceProvider extends ServiceProvider
         $cacheEnabled = config('settings.cache.enabled');
         
         /**
-         * We will filter the settings to avoid loading empty values. 
-         * This is useful to avoid loading settings that are not set yet.
-         * 
-         * If you want to load empty values, you can leave the default value for config() as null.
-         * If you cannot do it, you can open an issue or create a pull request to add this feature on Github.
+         * We only exclude null values so valid falsy settings like 0, false and ''
+         * can still be loaded into the runtime config.
          */
-        $settings = fn() => SystemSetting::all()->pluck('value', 'key')->filter()->toArray();
+        $settings = fn() => SystemSetting::all()->pluck('value', 'key')->reject(function ($value) {
+            return is_null($value);
+        })->toArray();
         
         if(!$cacheEnabled) {
             return $settings();

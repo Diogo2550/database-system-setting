@@ -17,7 +17,24 @@ return [
     'table_name' => 'system_settings',
     
     /**
-     * Here you can set the default values for your settings. You can also set the validation rules for your settings here.
+     * Here you can define the settings that should be synchronized to the database.
+     *
+     * Each item may contain:
+     * - default: the value that will be inserted when the setting does not exist yet.
+     * - description: a human-readable description for the admin UI.
+     * - schema: extra metadata for validation and rendering.
      */
+    'settings' => [
+        'date_format' => [
+            'default' => 'Y-m-d',
+            'description' => 'Formato de data padrão do sistema.',
+            'schema' => [
+                'type' => 'string',
+                'required' => true,
+                'max_length' => 12,
+            ],
+        ],
+    ],
     
+    'date_format' => 'Y-m-d',
 ];

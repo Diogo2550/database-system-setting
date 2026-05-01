@@ -5,7 +5,11 @@ namespace Diogo2550\DatabaseSystemSetting\Models;
 class SystemSetting extends \Illuminate\Database\Eloquent\Model {
     
     const CREATED_AT = null;
-    protected $fillable = ['key', 'value'];
+    protected $fillable = ['key', 'value', 'description', 'schema'];
+    protected $casts = [
+        'schema' => 'array',
+    ];
+    
     
     public function getTable() {
         return config('settings.table_name');
