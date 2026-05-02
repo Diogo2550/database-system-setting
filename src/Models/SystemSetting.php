@@ -12,7 +12,7 @@ class SystemSetting extends \Illuminate\Database\Eloquent\Model {
     
     
     public function getTable() {
-        return config('settings.table_name');
+        return config('settings.___internal___.table_name');
     }
     
     public static function booted() {
@@ -20,7 +20,7 @@ class SystemSetting extends \Illuminate\Database\Eloquent\Model {
          * Clean cache when a setting is saved or deleted. 
          */
         $clearCache = function() {
-            $key = config('settings.cache.key');
+            $key = config('settings.__internal__.cache.key');
             cache()->forget($key);
         };
         

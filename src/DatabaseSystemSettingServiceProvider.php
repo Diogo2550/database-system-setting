@@ -9,17 +9,14 @@ class DatabaseSystemSettingServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/settings.php', 'settings');
+        $this->mergeConfigFrom(__DIR__ . '/../config/settings.php', 'settings');
     }
 
-    /**
-     * Load the settings from the database and set them in the config. 
-     * We will cache the settings to avoid hitting the database on every request.
-     */
     public function boot() {
         $this->publishes([
-            __DIR__ . '/database/migrations/2026_05_01_010949_system_setting.php' => database_path('migrations/2026_05_01_010949_system_setting.php'),
-            __DIR__ . '/config/settings.php' => config_path('settings.php'),
+            __DIR__ . '/../database/migrations/2026_05_01_010949_system_setting.php' => database_path('migrations/2026_05_01_010949_system_setting.php'),
+            __DIR__ . '/../config/settings.php' => config_path('settings.php'),
+            __DIR__ . '/../config/settings-schema.php' => config_path('settings-schema.php'),
         ], 'database-system-setting');
 
         if ($this->app->runningInConsole()) {
@@ -28,6 +25,10 @@ class DatabaseSystemSettingServiceProvider extends ServiceProvider
             ]);
         }
         
+        /**
+         * Load the settings from the database and set them in the config. 
+         * We will cache the settings to avoid hitting the database on every request.
+         */
         $this->mergeSettingsIntoConfig();
     }
     
@@ -49,9 +50,9 @@ class DatabaseSystemSettingServiceProvider extends ServiceProvider
     }
     
     protected function getSettings(): array {
-        $ttl = config('settings.cache.ttl');
-        $cacheKey = config('settings.cache.key');
-        $cacheEnabled = config('settings.cache.enabled');
+        $ttl = config('settings.__internal__.cache.ttl');
+        $cacheKey = config('settings.__internal__.cache.key');
+        $cacheEnabled = config('settings.__internal__.cache.enabled');
         
         /**
          * We only exclude null values so valid falsy settings like 0, false and ''

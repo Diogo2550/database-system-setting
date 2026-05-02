@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('key')->unique();
             $table->text('value')->nullable();
-            $table->text('description')->nullable()->after('value');
-            $table->json('schema')->nullable()->after('description');
+            $table->text('description')->nullable();
+            $table->json('schema')->nullable();
             $table->timestamp('updated_at');
         });
     }
