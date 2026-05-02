@@ -12,6 +12,14 @@
 
 **Database System Settings** is an elegant Laravel package that solves a classic problem: how to give end-users (or administrators) control over settings without losing the framework's native features.
 
+<div align="center">
+
+<img src="https://i.imgur.com/dEICocG.png" alt="drawing" width="720" />
+
+Administrative panel for the database-system-setting created with FilamentPHP.
+
+</div>
+
 ## 📌 Why use this package?
 
 In traditional Laravel applications, we rely on `.env` or static files in `config/` to manage global variables. But what happens when you need to change the number of items displayed on the homepage, enable/disable an ad network, or change an API key **without needing to deploy or access the server**?
