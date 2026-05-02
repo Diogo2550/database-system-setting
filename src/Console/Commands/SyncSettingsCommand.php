@@ -13,7 +13,7 @@ class SyncSettingsCommand extends Command
 
     public function handle(): int
     {
-        $definitions = config('settings-schema', []);
+        $definitions = config('settings-schema.schema', []);
         
         if (!is_array($definitions) || $definitions === []) {
             $this->info('No settings definitions were found in config/settings-schema.php.');

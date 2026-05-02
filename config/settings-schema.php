@@ -9,13 +9,15 @@ return [
      * - description: a human-readable description for the admin UI.
      * - schema: extra metadata for validation and rendering.
      */
-    'date_format' => [
-        'default' => 'Y-m-d',
-        'description' => 'Formato de data padrão do sistema.',
-        'schema' => [
-            'type' => 'string',
-            'required' => true,
-            'max_length' => 12,
+    'schema' => [
+        'date_format' => [
+            'default' => 'Y-m-d',
+            'description' => 'Formato de data padrão do sistema.',
+            'schema' => [
+                'type' => 'string',
+                'required' => true,
+                'max_length' => 12,
+            ],
         ],
-    ],
+    ]
 ];

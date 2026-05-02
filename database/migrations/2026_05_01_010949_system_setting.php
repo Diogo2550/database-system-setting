@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('settings.table_name'), function (Blueprint $table) {
+        Schema::create(config('settings.__internal__.table_name'), function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
             $table->text('value')->nullable();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('settings.table_name'));
+        Schema::dropIfExists(config('settings.__internal__.table_name'));
     }
 };

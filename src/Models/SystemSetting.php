@@ -12,7 +12,7 @@ class SystemSetting extends \Illuminate\Database\Eloquent\Model {
     
     
     public function getTable() {
-        return config('settings.___internal___.table_name');
+        return config('settings.__internal__.table_name');
     }
     
     public static function booted() {

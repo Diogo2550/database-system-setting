@@ -4,7 +4,7 @@ return [
     /**
      * Don't modify these values unless you know what you're doing.
      */
-    '___internal___' => [
+    '__internal__' => [
         'cache' => [
             /**
              * If you want to disable caching, set this value to false. 
@@ -19,7 +19,7 @@ return [
     ],
     
     /**
-     * Define your system settings below here. The key of each setting will be used to access it via the config('settings.KEY') helper.
+     * Define your system settings below here. The key of each setting will be used to access it via the config('settings.KEY') helper.correta?
      * The date_format setting here and in settings-schema.php is just an example. You can remove it and add your own settings as needed.
      */
     'date_format' => 'Y-m-d',
